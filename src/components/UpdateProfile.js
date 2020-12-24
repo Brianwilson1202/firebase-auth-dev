@@ -10,7 +10,7 @@ const UpdateProfile = () => {
   const { currentUser, updateEmail, updatePassword } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory()
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,24 +18,26 @@ const UpdateProfile = () => {
       return setError("Passwords do not match");
     }
 
-    const promises = []
+    const promises = [];
     setLoading(true);
     setError("");
     if (emailRef.current.value !== currentUser.email) {
-      promises.push(updateEmail(emailRef.current.value))
+      promises.push(updateEmail(emailRef.current.value));
     }
     if (passwordRef.current.value) {
-      promises.push(updatePassword(passwordRef.current.value))
+      promises.push(updatePassword(passwordRef.current.value));
     }
 
-    Promise.all(promises).then(() => {
-      history.push('/')
-    }).catch(() => {
-      setError('Failed to update account')
-    }).finally(() => {
-      setLoading(false)
-    })
-
+    Promise.all(promises)
+      .then(() => {
+        history.push("/");
+      })
+      .catch(() => {
+        setError("Failed to update account");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (

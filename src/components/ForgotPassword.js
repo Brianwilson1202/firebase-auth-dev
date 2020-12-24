@@ -8,7 +8,7 @@ const ForgotPassword = () => {
   const { resetPassword } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +18,7 @@ const ForgotPassword = () => {
       setError("");
       setLoading(true);
       await resetPassword(emailRef.current.value);
-      setMessage('Check your inbox for further instructions')
+      setMessage("Check your inbox for further instructions");
     } catch {
       setError("Fialed to reset password");
     }

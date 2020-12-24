@@ -9,7 +9,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   function signUp(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -18,22 +18,22 @@ export function AuthProvider({ children }) {
     return auth.signInWithEmailAndPassword(email, password);
   }
   function logOut() {
-    auth.signOut()
+    auth.signOut();
   }
   function resetPassword(email) {
-    auth.sendPasswordResetEmail(email)
+    auth.sendPasswordResetEmail(email);
   }
   function updateEmail(email) {
-    return currentUser.updateEmail(email)
+    return currentUser.updateEmail(email);
   }
   function updatePassword(password) {
-    return currentUser.updatePassword(password)
+    return currentUser.updatePassword(password);
   }
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
-      setLoading(false)
+      setLoading(false);
     });
 
     return unsubscribe;
@@ -46,8 +46,12 @@ export function AuthProvider({ children }) {
     signUp,
     resetPassword,
     updatePassword,
-    updateEmail
+    updateEmail,
   };
 
-  return <AuthContext.Provider value={value}>{ !loading && children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 }
